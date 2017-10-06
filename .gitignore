@@ -1,32 +1,44 @@
-# Prerequisites
-*.d
+#include <iostream>
+#include <cstring>
+#include <sstream>
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+using namespace std;
+int main ()
+{
+string length;
+double x,y;
+char z;
 
-# Precompiled Headers
-*.gch
-*.pch
+getline( cin, length);
+istringstream stream(length);
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
+stream>>x;
+while ( stream>>z)
+{
+   if( z=='+')
+   {
+       stream>>y;
+       x += y;
+   }
+   if( z=='-')
+   {
+       stream>>y;
+       x -= y;
+   }
+   if (z=='*')
+   {
+       stream>>y;
+       x *= y;
+   }
+   if(z=='/')
+   {
+       if (x==0 && y==0) {cout<<"nan";}
+       else if (x!=0 && y==0) {cout<<"inf";}
+       else
+       stream>>y;
+       x /= y;
+   }
+   
+}
+cout<<x;
+}
