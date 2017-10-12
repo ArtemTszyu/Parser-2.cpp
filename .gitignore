@@ -5,40 +5,66 @@
 using namespace std;
 int main ()
 {
-string length;
-double x,y;
-char z;
+string l;
+double x,y,z;
+char m,n='a';
 
-getline( cin, length);
-istringstream stream(length);
+getline( cin, l);
+istringstream stream(l);
 
 stream>>x;
-while ( stream>>z)
+while ( stream>>m)
 {
-   if( z=='+')
-   {
-       stream>>y;
-       x += y;
-   }
-   if( z=='-')
-   {
-       stream>>y;
-       x -= y;
-   }
-   if (z=='*')
-   {
-       stream>>y;
-       x *= y;
-   }
-   if(z=='/')
-   {
-       if (x==0 && y==0) {cout<<"nan";}
-       else if (x!=0 && y==0) {cout<<"inf";}
+stream>>y;
+if( m=='+')
+{
+	x=x+y;
+	n='+';      
+	z=y;        
+}
+if (m=='-')
+{
+	x=x-y;
+	n='-';
+	z=y;
+}
+if ((m=='*')&&(n=='a')) 
+{
+	x=x*y;	
+}
+if ((m=='/')&&(n=='a')) 
+{
+	if (y==0 && x==0) {cout<<"nan"; return -1;}
+       else if (x!=0 && y==0) {cout<<"inf"; return -1;}
        else
-       stream>>y;
-       x /= y;
-   }
-   
+       x=x/y;	
+}
+if ((m=='*')&&(n=='+'))
+{
+	x=x-z;
+	z=z*y;
+	x=x+z;
+	n='+';
+}
+if ((m=='*')&&(n=='-'))
+{
+	x=x+z;
+	z=z/y;
+	x=x-z;
+	n='-';
+}
+if ((m=='/')&&(n=='+'))
+{
+	x=x-z;
+		
+		if (z==0 && y==0) {cout<<"nan"; return -1;}
+    	else if (z!=0 && y==0) {cout<<"inf"; return -1;}
+    	else
+    	z=z/y;
+    	x=x+z;
+    	n='+';
+}
+
 }
 cout<<x;
 }
